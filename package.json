@@ -1,6 +1,6 @@
 {
   "name": "frontapp-node",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "FrontApp Node.js API Wrapper",
   "homepage": "https://github.com/oitozero/frontapp-node",
   "bugs:": "https://github.com/oitozero/frontapp-node/issues",

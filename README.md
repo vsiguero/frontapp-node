@@ -4,7 +4,7 @@
 ## Installation
 
 ```bash
-npm install frontapp
+npm install frontapp-node
 ```
 
 ## Testing
@@ -32,7 +32,7 @@ var FrontApp = require('./dist/index');
 Require FrontApp:
 
 ```node
-var FrontApp = require('frontapp');
+var FrontApp = require('frontapp-node');
 ```
 
 Create a client:

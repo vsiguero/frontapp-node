@@ -1,30 +1,33 @@
 # frontapp
-> FrontApp Node.js API Wrapper
+
+> FrontApp Node.js API Wrapper using promises (or callbacks if needed) with Typescrypt, Webpack and Jest.
+
+This project is based on frontapp-node by @oitozero
 
 ## Installation
 
 ```bash
-npm install frontapp-node
+npm install frontapp-node-ts
 ```
 
-## Testing
+## Testing using Jest
 
 ```bash
-npm test
+npm run test
 ```
 
 ## Running the code locally
 
-Compile using babel:
+Compile using typescript & webpack:
 
 ```bash
-gulp babel
+npm run build
 ```
 
 Require FrontApp:
 
 ```node
-var FrontApp = require('./dist/index');
+const FrontAppClient = require('./dist');
 ```
 
 ## Usage
@@ -32,42 +35,54 @@ var FrontApp = require('./dist/index');
 Require FrontApp:
 
 ```node
-var FrontApp = require('frontapp-node');
+const FrontAppClient = require('frontapp-node-ts');
+```
+
+Or if you're using Typescript:
+
+```node
+import FrontAppClient from 'frontapp-node-ts';
 ```
 
 Create a client:
-#### Using Personal Access Tokens
+
+#### Using Front's API JWT Access Tokens
+
 ```node
-var client = new FrontApp.Client('token');
+const frontApp = new FrontAppClient('front_api_token');
 ```
 
-## Callbacks
+## Promises & async/await
 
-This client library supports two kinds of callbacks:
-
-```node
-client.analytics.get({}, function (err, r) {
-  // err is an error response object, or null
-  // r is a successful response object, or null
-});
-```
-
-## Promises
-
-This client library also supports using Promises instead of callbacks:
+This client library by default supports Promises or Async/Await:
 
 ```node
-client.analytics.get({}).then(function (r) {
+frontApp.clients.get({}).then(function (r) {
   // ...
 });
 ```
 
-## Analytics
+```node
+try {
+  await frontApp.clients.get({});
+} catch(err: FrontAppError) {
+  console.log(err);
+}
+```
+
+## Callbacks
+
+This client library also supports callbacks:
 
 ```node
-// To get statistics about activities happening in Front, you need to requests the correspondig metrics of the analytics.
-client.analytics.get({
-  start: '',
-  end: '',
-  metrics: []
-}, callback);
+const frontApp = new FrontApp('front_api_token').useCallbacks();
+```
+
+And then:
+
+```node
+frontApp.clients.get({}, (err, res) => {
+  // err is an error object, or null
+  // res is a successful response object, or null
+});
+```
